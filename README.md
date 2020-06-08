@@ -46,11 +46,10 @@ monad of the `ZIO` type.
 
 [//]: # (Table generated from docs/type_aliases.csv using https://www.tablesgenerator.com/markdown_tables)
 
-
-| Haskell Type | Scala Type | Notes                                                                                                 |
-|--------------|------------|-------------------------------------------------------------------------------------------------------|
-| UIO a        | UIO[A]     | This is a type alias in Scala but a concrete type in Haskell due to UIO being an inner monadic type.  |
-| URIO r a     | URIO[R, A] |                                                                                                       |
-| Task a       | Task[A]    |                                                                                                       |
-| RIO r a      | RIO[R, A]  | Same idea as in Scala. Not to be confused with the RIO library's `RIO` monad, but they are isomorphic. |
-| EIO e a      | IO[E, A]   | This is a type alias in Scala but a concrete type in Haskell due to EIO being an inner monadic type.  |
+| Haskell Type 	| Scala Type 	| Notes                                                                                                 	|
+|--------------	|------------	|-------------------------------------------------------------------------------------------------------	|
+| UIO a        	| UIO[A]     	| This is a type alias in Scala but a concrete type in Haskell due to UIO being an inner monadic type.  	|
+| URIO r a     	| URIO[R, A] 	|                                                                                                       	|
+| Task a       	| Task[A]    	|                                                                                                       	|
+| RIO r a      	| RIO[R, A]  	| Same idea as in Scala. Not to be confused with the RIO librarys `RIO` monad, but they are isomorphic. 	|
+| EIO e a      	| IO[E, A]   	| This is a type alias in Scala but a concrete type in Haskell due to EIO being an inner monadic type.  	|

@@ -1,10 +1,10 @@
-name:                haskell-zio
+name:                zio
 version:             0.1.0.0
 github:              "githubuser/haskell-zio"
-license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2020 Author name here"
+license:             MPL-2.0
+author:              "Brandon Elam Barker"
+maintainer:          "brandon.barker@gmail.com"
+copyright:           "2020 Brandon Elam Barker"
 
 extra-source-files:
 - README.md

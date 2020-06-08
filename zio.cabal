@@ -4,17 +4,17 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4921e58c1b1ff79ef5072120e83eee92a35ddfdf1a7b14fbbad45433081e71d3
+-- hash: 4bee49dc632ab793c8b9b12607690f2a1d29094658d68d27f690ea969f399106
 
-name:           haskell-zio
+name:           zio
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/haskell-zio#readme>
 homepage:       https://github.com/githubuser/haskell-zio#readme
 bug-reports:    https://github.com/githubuser/haskell-zio/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2020 Author name here
-license:        BSD3
+author:         Brandon Elam Barker
+maintainer:     brandon.barker@gmail.com
+copyright:      2020 Brandon Elam Barker
+license:        MPL-2.0
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
@@ -29,7 +29,7 @@ library
   exposed-modules:
       ZIO.Trans
   other-modules:
-      Paths_haskell_zio
+      Paths_zio
   hs-source-dirs:
       src
   build-depends:
@@ -44,7 +44,7 @@ test-suite haskell-zio-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Paths_haskell_zio
+      Paths_zio
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N

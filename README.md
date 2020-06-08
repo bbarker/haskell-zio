@@ -2,9 +2,9 @@
 
 A [small](src/ZIO/Trans.hs) monad-transformer analogue to the
 Scala [ZIO](https://github.com/zio/zio)
-library (basically, [UIO](hackage.haskell.org/package/unexceptionalio) +
+library (basically, [UIO](http://hackage.haskell.org/package/unexceptionalio) +
 [Reader](hackage.haskell.org/package/transformers/docs/Control-Monad-Trans-Reader.html) +
-[Either/ExceptT](hackage.haskell.org/package/mtl/docs/Control-Monad-Except.html))
+[Either/ExceptT](hackage.haskell.org/package/mtl/docs/Control-Monad-Except.html)).
 
 This is meant to provide the same basic functionality of ZIO monad.
 While I'm not immediately looking into other features of ZIO, such as
@@ -13,12 +13,12 @@ pull requests.
 
 ## Comparison to other Haskell libraries
 
-- [UIO](hackage.haskell.org/package/unexceptionalio) This ZIO library
+- [UIO](http://hackage.haskell.org/package/unexceptionalio) This ZIO library
 builds upon UIO (Unexceptional-IO) as a dependency, and it is the
 inner-most monad in the transformer stack. We use UIO, in conjunction
 with `ExceptT`, to model possible error states (or the lack thereof)
 more explicitly. In other words, we are trying to make all errors or
-exceptions
+exceptions.
 [checked exceptions](https://en.wikibooks.org/wiki/Java_Programming/Checked_Exceptions), where possible. See the [blog post](https://singpolyma.net/2018/05/error-handling-in-haskell/) (or [backup](docs/UIO.md)) for more details.
 - [RIO](https://hackage.haskell.org/package/rio)
 [integrates](hackage.haskell.org/package/rio/docs/src/RIO.Prelude.RIO.html#RIO) `ReaderT` with `IO`, but somewhat like Scala ZIO, provides

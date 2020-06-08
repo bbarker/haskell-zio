@@ -1,2 +1,56 @@
 # haskell-zio
-A monad-transformer analogue to the Scala ZIO library (basically, UIO + Reader + Either)
+
+A [small](src/ZIO/Trans.hs) monad-transformer analogue to the
+Scala [ZIO](https://github.com/zio/zio)
+library (basically, [UIO](hackage.haskell.org/package/unexceptionalio) +
+[Reader](hackage.haskell.org/package/transformers/docs/Control-Monad-Trans-Reader.html) +
+[Either/ExceptT](hackage.haskell.org/package/mtl/docs/Control-Monad-Except.html))
+
+This is meant to provide the same basic functionality of ZIO monad.
+While I'm not immediately looking into other features of ZIO, such as
+concurrency, I welcome suggestions via issues or
+pull requests.
+
+## Comparison to other Haskell libraries
+
+- [UIO](hackage.haskell.org/package/unexceptionalio) This ZIO library
+builds upon UIO (Unexceptional-IO) as a dependency, and it is the
+inner-most monad in the transformer stack. We use UIO, in conjunction
+with `ExceptT`, to model possible error states (or the lack thereof)
+more explicitly. In other words, we are trying to make all errors or
+exceptions
+[checked exceptions](https://en.wikibooks.org/wiki/Java_Programming/Checked_Exceptions), where possible. See the [blog post](https://singpolyma.net/2018/05/error-handling-in-haskell/) (or [backup](docs/UIO.md)) for more details.
+- [RIO](https://hackage.haskell.org/package/rio)
+[integrates](hackage.haskell.org/package/rio/docs/src/RIO.Prelude.RIO.html#RIO) `ReaderT` with `IO`, but somewhat like Scala ZIO, provides
+much additional functionality, and providing much of that functionality\
+will be a goal of haskell-zio as well.
+- [Trio](https://github.com/snoyberg/trio) has essentially the same goals
+as ZIO (and I believe it is isomorphic to ZIO), but is a self-described
+experiment at the moment. The major experimental aspect I'm aware of is
+that it is avoiding usage of `ExceptT` to improve performance, which
+I have not investigated. We are currently aiming for stability here,
+but ideally any code written for haskell-ZIO could easily be transferred
+to using `Trio`, or vice versa. If you see a difference, **please raise an
+issue** so we can document it or fix it.
+
+## The Scala-Haskell ZIO dictionary
+
+### Type Aliases
+The Scala ZIO type parameters and
+[aliases](https://zio.dev/docs/overview/overview_index#type-aliases) are
+largely reproduced in Haskell, though in some cases we can't exactly
+reproduce them. For instance, `IO` is already taken in Haskell at
+a very fundamental level. As well, `UIO` has the same meaning as in
+the Scala implementation, but it isn't an alias, since it is an inner
+monad of the `ZIO` type.
+
+[//]: # (Table generated from docs/type_aliases.csv using https://www.tablesgenerator.com/markdown_tables)
+
+
+| Haskell Type | Scala Type | Notes                                                                                                 |
+|--------------|------------|-------------------------------------------------------------------------------------------------------|
+| UIO a        | UIO[A]     | This is a type alias in Scala but a concrete type in Haskell due to UIO being an inner monadic type.  |
+| URIO r a     | URIO[R, A] |                                                                                                       |
+| Task a       | Task[A]    |                                                                                                       |
+| RIO r a      | RIO[R, A]  | Same idea as in Scala. Not to be confused with the RIO library's `RIO` monad, but they are isomorphic. |
+| EIO e a      | IO[E, A]   | This is a type alias in Scala but a concrete type in Haskell due to EIO being an inner monadic type.  |

@@ -10,6 +10,8 @@ module ZIO.Trans (
   , runZIO
   , withZIO
   , module Control.Monad.Reader
+  , module UnexceptionalIO
+  , module UnexceptionalIO.Trans
 
 ) where
 

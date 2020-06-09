@@ -1,5 +1,11 @@
 # haskell-zio
 
+I like to call `ZIO` a *best-practices monad for applications*. It
+wraps in a `Reader` monad for carrying around configuration and
+environment data, and slightly more controversially, makes
+error-handling more explicit by making all recoverable exceptions
+(errors) part of the return-type of functions.
+
 A [small](src/ZIO/Trans.hs) monad-transformer analogue to the
 Scala [ZIO](https://github.com/zio/zio)
 library (basically, [UIO](http://hackage.haskell.org/package/unexceptionalio) +
@@ -43,6 +49,10 @@ reproduce them. For instance, `IO` is already taken in Haskell at
 a very fundamental level. As well, `UIO` has the same meaning as in
 the Scala implementation, but it isn't an alias, since it is an inner
 monad of the `ZIO` type.
+
+An apparent downsize of having `UIO`, `EIO`, and `ZIO` as distinct
+(non-aliased) types is that one might feel inclined to provide APIs
+for one or more of these when warranted.
 
 [//]: # (Table generated from docs/type_aliases.csv using https://www.tablesgenerator.com/markdown_tables)
 

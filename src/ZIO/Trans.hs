@@ -5,10 +5,10 @@
 
 module ZIO.Trans (
     EIO, ZIO
-  , elift, zlift
-  , mapError
-  , runZIO
-  , withZIO
+  , elift, ezlift, zlift
+  , mapEError, mapZError
+  , runEIO, runZIO
+  , withEIO, withZIO
   , module Control.Monad.Reader
   , module UnexceptionalIO
   , module UnexceptionalIO.Trans
@@ -38,19 +38,32 @@ type Task a = forall r. ZIO r SomeNonPseudoException a
 
 type RIO r a = ZIO r SomeNonPseudoException a
 
-
-runZIO :: MonadIO m => ZIO r e a -> r -> (e -> m a) -> m a
-runZIO app env handler = do
-  let eio = runReaderT (_unZIO app) env
-  resEi :: Either e a <- (run . runExceptT . _unEIO) eio
-  either handler pure resEi
-
-
 elift :: IO a -> EIO SomeNonPseudoException a
 elift ioa =  EIO (fromIO ioa)
 
 zlift :: IO a -> ZIO r SomeNonPseudoException a
-zlift ioa = (ZIO . lift . elift) ioa
+zlift = ZIO . lift . elift
+
+ezlift :: forall r e a. EIO e a -> ZIO r e a
+ezlift = ZIO . lift
+
+runEIO :: MonadIO m => EIO e a -> (e -> m a) -> m a
+runEIO eio handler = do
+  resEi :: Either e a <- (run . runExceptT . _unEIO) eio
+  either handler pure resEi
+
+withEIO :: (e -> e') -> EIO e a -> EIO e' a
+withEIO h =  EIO
+           . withExceptT h
+           . _unEIO
+
+mapEError :: (e -> e') -> EIO e a -> EIO e' a
+mapEError = withEIO
+
+runZIO :: MonadIO m => ZIO r e a -> r -> (e -> m a) -> m a
+runZIO app env handler = do
+  let eio = runReaderT (_unZIO app) env
+  runEIO eio handler
 
 withZIO :: r -> (e -> e') -> ZIO r e a -> ZIO r e' a
 withZIO r h =  ZIO
@@ -61,7 +74,8 @@ withZIO r h =  ZIO
              . flip runReaderT r
              . _unZIO
 
-mapError :: (e -> e') -> ZIO r e a -> ZIO r e' a
-mapError h m = do
+mapZError :: (e -> e') -> ZIO r e a -> ZIO r e' a
+mapZError h m = do
   r <- ask
   withZIO r h m
+

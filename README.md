@@ -1,21 +1,20 @@
 # haskell-zio
 
-I like to call `ZIO` a *best-practices monad for applications*. It
-wraps in a `Reader` monad for carrying around configuration and
-environment data, and slightly more controversially, makes
-error-handling more explicit by making all recoverable exceptions
-(errors) part of the return-type of functions.
-
 A [small](src/ZIO/Trans.hs) monad-transformer analogue to the
 Scala [ZIO](https://github.com/zio/zio)
 library (basically, [UIO](http://hackage.haskell.org/package/unexceptionalio) +
 [Reader](hackage.haskell.org/package/transformers/docs/Control-Monad-Trans-Reader.html) +
 [Either/ExceptT](hackage.haskell.org/package/mtl/docs/Control-Monad-Except.html)).
 
-This is meant to provide the same basic functionality of ZIO monad.
-While I'm not immediately looking into other features of ZIO, such as
-concurrency, I welcome suggestions via issues or
-pull requests.
+I like to call `ZIO` a *best-practices monad for applications*. It
+wraps in a `Reader` monad for carrying around configuration and
+environment data, and slightly more controversially, makes
+error-handling more explicit by making all recoverable exceptions
+(errors) part of the return-type of functions.
+
+Note thatt this is meant to provide the same basic functionality of the `ZIO` monad.
+While I'm not immediately looking into other features of ZIO-the-library, such as
+concurrency, I welcome suggestions via issues or pull requests.
 
 ## Comparison to other Haskell libraries
 

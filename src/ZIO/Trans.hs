@@ -9,6 +9,7 @@ module ZIO.Trans (
   , mapEError, mapZError
   , runEIO, runZIO
   , withEIO, withZIO
+  , module Control.Monad.Except
   , module Control.Monad.Reader
   , module UnexceptionalIO
   , module UnexceptionalIO.Trans

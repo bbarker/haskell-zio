@@ -10,7 +10,6 @@ module ZIO.Trans (
   , runEIO, runZIO
   , withEIO, withZIO
   , module Control.Monad.Reader
-  , module Control.Monad.Trans.Except
   , module UnexceptionalIO
   , module UnexceptionalIO.Trans
 

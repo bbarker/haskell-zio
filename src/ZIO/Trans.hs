@@ -27,6 +27,7 @@ import           Control.Monad.Reader hiding (lift)
 import           Control.Monad.Trans.Class (lift)
 import           Control.Monad.Trans.Except
 import           Data.Either (fromRight)
+import           Data.Void (Void)
 import           UnexceptionalIO hiding (fromIO, lift, run)
 import           UnexceptionalIO.Trans (UIO, fromIO, run)
 
@@ -59,13 +60,13 @@ ezlift = ZIO . lift
 uelift :: UIO a -> UEIO a
 uelift = EIO . lift
 
-uzlift :: forall r a. UIO a -> URIO r a
+uzlift :: ∀ r a. UIO a -> URIO r a
 uzlift = ezlift . uelift
 
-euUnlift :: EIO r a -> UIO a
+euUnlift :: EIO Void a -> UIO a
 euUnlift ueio = (fromRight undefined) <$> ((runExceptT . _unEIO) ueio)
 
-zuUnlift :: UZIO a -> UIO a
+zuUnlift :: ZIO Void Void a -> UIO a
 zuUnlift = euUnlift . flip runReaderT undefined . _unZIO
 
 runEIO :: MonadIO m => EIO e a -> (e -> m a) -> m a

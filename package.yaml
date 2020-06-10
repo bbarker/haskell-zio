@@ -28,9 +28,11 @@ dependencies:
 
 library:
   source-dirs: src
+  ghc-options:
+  - -Wall -Wtabs -Wincomplete-record-updates
 
 tests:
-  haskell-zio-test:
+  zio-test:
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
@@ -38,4 +40,4 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - haskell-zio
+    - zio

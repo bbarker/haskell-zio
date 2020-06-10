@@ -4,7 +4,7 @@
 
 
 module ZIO.Trans (
-    EIO, ZIO
+    EIO(..), ZIO(..)
   , elift, ezlift, zlift
   , mapEError, mapZError
   , runEIO, runZIO
@@ -67,8 +67,7 @@ runZIO app env handler = do
   runEIO eio handler
 
 withZIO :: r -> (e -> e') -> ZIO r e a -> ZIO r e' a
-withZIO r h =  ZIO
-             . lift
+withZIO r h =  ezlift
              . EIO
              . withExceptT h
              . _unEIO

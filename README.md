@@ -9,8 +9,9 @@ library (basically, [UIO](http://hackage.haskell.org/package/unexceptionalio) +
 I like to call `ZIO` a *best-practices monad for applications*. It
 wraps in a `Reader` monad for carrying around configuration and
 environment data, and slightly more controversially, makes
-error-handling more explicit by making all recoverable exceptions
-(errors) part of the return-type of functions.
+error-handling more explicit by making all recoverable\
+[exceptions and errors](https://wiki.haskell.org/Error_vs._Exception)
+part of the return-type of functions.
 
 Note thatt this is meant to provide the same basic functionality of the `ZIO` monad.
 While I'm not immediately looking into other features of ZIO-the-library, such as

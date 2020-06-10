@@ -57,10 +57,10 @@ zlift = ZIO . lift . elift
 ezlift :: forall r e a. EIO e a -> ZIO r e a
 ezlift = ZIO . lift
 
-uelift :: UIO a -> UEIO a
+uelift :: ∀ e a. UIO a -> EIO e a
 uelift = EIO . lift
 
-uzlift :: ∀ r a. UIO a -> URIO r a
+uzlift :: ∀ r e a. UIO a -> ZIO r e a
 uzlift = ezlift . uelift
 
 euUnlift :: UEIO a -> UIO a

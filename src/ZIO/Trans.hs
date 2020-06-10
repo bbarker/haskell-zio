@@ -5,7 +5,10 @@
 
 module ZIO.Trans (
     EIO(..), ZIO(..)
+  , UEIO, URIO, UZIO, Task, RIO
   , elift, ezlift, zlift
+  , uelift, uzlift
+  , euUnlift, zuUnlift
   , mapEError, mapZError
   , runEIO, runZIO
   , withEIO, withZIO

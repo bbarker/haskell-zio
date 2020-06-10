@@ -21,12 +21,7 @@ module ZIO.Trans (
 ) where
 
 import           Control.Monad.Except
-import           Control.Monad.Fix
-import           Control.Monad.IO.Class (MonadIO,)
 import           Control.Monad.Reader hiding (lift)
-import           Control.Monad.Trans.Class (lift)
-import           Control.Monad.Trans.Except
-import           Data.Either (either)
 import           Data.Void (Void, absurd)
 import           UnexceptionalIO hiding (fromIO, lift, run)
 import           UnexceptionalIO.Trans (UIO, fromIO, run)
@@ -67,8 +62,7 @@ euUnlift :: UEIO a -> UIO a
 euUnlift ueio = (either absurd id) <$> ((runExceptT . _unEIO) ueio)
 
 zuUnlift :: UZIO a -> UIO a
-zuUnlift = euUnlift . flip runReaderT (myVoid) . _unZIO
-  where myVoid = myVoid
+zuUnlift = euUnlift . flip runReaderT undefined . _unZIO
 
 runEIO :: MonadIO m => EIO e a -> (e -> m a) -> m a
 runEIO eio handler = do

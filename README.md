@@ -54,11 +54,11 @@ An apparent downsize of having `UIO`, `EIO`, and `ZIO` as distinct
 (non-aliased) types is that one might feel inclined to provide APIs
 for one or more of these when warranted. For this reason `UEIO e`,
 `UZIO a`, and other aliases along with associated lift and unlift
-functions are provided. These aliases are most likely only useful
-as return values, as the quantification of type variables needs
-to be unified across an entire function signature; for instance,
-instead of having function like `UEIO a -> UIO a` you would instead
-need to write the signature as `EIO Void a -> UIO a`. On the other
+functions are provided. These aliases are most often only useful
+as return values, as they contain `Void` in the expanded type
+; for instance, instead of having function like `UEIO a -> UIO a`
+you would instead need to write the signature as `EIO e a -> UIO a`
+for cases where you actually want to handle all error types. On the other
 hand, a signature that ends like ` -> UEIO a` should be fine.
 
 [//]: # (Table generated from docs/type_aliases.csv using https://www.tablesgenerator.com/markdown_tables)

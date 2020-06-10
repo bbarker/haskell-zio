@@ -38,13 +38,13 @@ newtype EIO e a = EIO { _unEIO :: ExceptT e UIO a }
 newtype ZIO r e a = ZIO { _unZIO :: ReaderT r (EIO e) a }
   deriving ( Functor, Applicative, Monad, MonadError e, MonadFix, MonadReader r, Unexceptional )
 
-type UEIO a = ∀ r. EIO r a
+type UEIO a = EIO Void a
 
-type URIO r a = ∀ e. ZIO r e a
+type URIO r a = ZIO r Void a
 
-type UZIO a = ∀ r e. ZIO r e a
+type UZIO a = ZIO Void Void a
 
-type Task a = ∀ r. ZIO r SomeNonPseudoException a
+type Task a = ZIO Void SomeNonPseudoException a
 
 type RIO r a = ZIO r SomeNonPseudoException a
 
@@ -63,10 +63,10 @@ uelift = EIO . lift
 uzlift :: ∀ r a. UIO a -> URIO r a
 uzlift = ezlift . uelift
 
-euUnlift :: EIO Void a -> UIO a
+euUnlift :: UEIO a -> UIO a
 euUnlift ueio = (fromRight undefined) <$> ((runExceptT . _unEIO) ueio)
 
-zuUnlift :: ZIO Void Void a -> UIO a
+zuUnlift :: UZIO a -> UIO a
 zuUnlift = euUnlift . flip runReaderT undefined . _unZIO
 
 runEIO :: MonadIO m => EIO e a -> (e -> m a) -> m a

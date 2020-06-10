@@ -13,7 +13,7 @@ error-handling more explicit by making all recoverable\
 [exceptions and errors](https://wiki.haskell.org/Error_vs._Exception)
 part of the return-type of functions.
 
-Note thatt this is meant to provide the same basic functionality of the `ZIO` monad.
+Note that this is meant to provide the same basic functionality of the `ZIO` monad.
 While I'm not immediately looking into other features of ZIO-the-library, such as
 concurrency, I welcome suggestions via issues or pull requests.
 
@@ -52,14 +52,20 @@ monad of the `ZIO` type.
 
 An apparent downsize of having `UIO`, `EIO`, and `ZIO` as distinct
 (non-aliased) types is that one might feel inclined to provide APIs
-for one or more of these when warranted.
+for one or more of these when warranted. For this reason
+`UEIO` and `UZIO` aliases along with associated lift and unlift
+functions are provided.
 
 [//]: # (Table generated from docs/type_aliases.csv using https://www.tablesgenerator.com/markdown_tables)
 
-| Haskell Type 	| Scala Type 	| Notes                                                                                                 	|
-|--------------	|------------	|-------------------------------------------------------------------------------------------------------	|
-| UIO a        	| UIO[A]     	| This is a type alias in Scala but a concrete type in Haskell due to UIO being an inner monadic type.  	|
-| URIO r a     	| URIO[R, A] 	|                                                                                                       	|
-| Task a       	| Task[A]    	|                                                                                                       	|
-| RIO r a      	| RIO[R, A]  	| Same idea as in Scala. Not to be confused with the RIO librarys `RIO` monad, but they are isomorphic. 	|
-| EIO e a      	| IO[E, A]   	| This is a type alias in Scala but a concrete type in Haskell due to EIO being an inner monadic type.  	|
+
+| Haskell Type 	| Type Alias                          	| Scala Type   	| Notes                                                                                                 	|
+|--------------	|-------------------------------------	|--------------	|-------------------------------------------------------------------------------------------------------	|
+| `ZIO r e a`  	| `ZIO r e a`                         	| `ZIO[R,E,A`] 	|                                                                                                       	|
+| `UIO a`      	|                                     	| `UIO[A]`     	| This is a type alias in Scala but a concrete type in Haskell due to UIO being an inner monadic type.  	|
+| `EIO e a`    	|                                     	| `IO[E, A]`   	| This is a type alias in Scala but a concrete type in Haskell due to EIO being an inner monadic type.  	|
+| `RIO r a`    	| `ZIO r SomeNonPseudoException a`    	| `RIO[R, A]`  	| Same idea as in Scala. Not to be confused with the RIO library's `RIO` monad, but they are isomorphic. 	|
+| `Task a`     	| `ZIO Void SomeNonPseudoException a` 	| `Task[A]`    	|                                                                                                       	|
+| `UEIO a`     	| `EIO Void a`                        	| `UIO[A]`     	|                                                                                                       	|
+| `URIO r a`   	| `ZIO r Void a`                      	| `URIO[R, A]` 	| Same idea as in Scala; a ZIO value isomorphic to a RIO value (can be projected to the RIO value).     	|
+| `UZIO a`     	| `ZIO Void Void a`                   	| `UIO[A]`     	|                                                                                                       	|

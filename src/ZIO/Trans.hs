@@ -22,6 +22,7 @@ import           Control.Monad.IO.Class (MonadIO,)
 import           Control.Monad.Reader hiding (lift)
 import           Control.Monad.Trans.Class (lift)
 import           Control.Monad.Trans.Except
+import           Data.Either (fromRight)
 import           Data.Void (Void)
 import           UnexceptionalIO hiding (fromIO, lift, run)
 import           UnexceptionalIO.Trans (UIO, fromIO, run)
@@ -33,20 +34,36 @@ newtype EIO e a = EIO { _unEIO :: ExceptT e UIO a }
 newtype ZIO r e a = ZIO { _unZIO :: ReaderT r (EIO e) a }
   deriving ( Functor, Applicative, Monad, MonadError e, MonadFix, MonadReader r, Unexceptional )
 
+type UEIO a = EIO Void a
+
 type URIO r a = ZIO r Void a
 
-type Task a = forall r. ZIO r SomeNonPseudoException a
+type UZIO a = ZIO Void Void a
+
+type Task a = ZIO Void SomeNonPseudoException a
 
 type RIO r a = ZIO r SomeNonPseudoException a
 
 elift :: IO a -> EIO SomeNonPseudoException a
-elift ioa =  EIO (fromIO ioa)
+elift =  EIO . fromIO
 
 zlift :: IO a -> ZIO r SomeNonPseudoException a
 zlift = ZIO . lift . elift
 
 ezlift :: forall r e a. EIO e a -> ZIO r e a
 ezlift = ZIO . lift
+
+uelift :: UIO a -> UEIO a
+uelift = EIO . lift
+
+uzlift :: forall r a. UIO a -> URIO r a
+uzlift = ezlift . uelift
+
+euUnlift :: UEIO a -> UIO a
+euUnlift ueio = (fromRight undefined) <$> ((runExceptT . _unEIO) ueio)
+
+zuUnlift :: UZIO a -> UIO a
+zuUnlift = euUnlift . flip runReaderT undefined . _unZIO
 
 runEIO :: MonadIO m => EIO e a -> (e -> m a) -> m a
 runEIO eio handler = do

@@ -61,15 +61,71 @@ other than `Void` (that's one big reason why we're using this library!),
 so we'd prefer to have e.g. `uelift :: ∀ e a. UIO a -> EIO e a`,
 not `uelift :: UIO a -> UEIO a`.
 
-[//]: # (Table generated from docs/type_aliases.csv using https://www.tablesgenerator.com/markdown_tables)
+[//]: # (`nix-shell -p pandoc` then `pandoc TypesTable.md -o TypesTable.html`)
 
-| Haskell Type 	| Alias for                           	| Scala Type   	| Notes                                                                                                 	|
-|--------------	|-------------------------------------	|--------------	|-------------------------------------------------------------------------------------------------------	|
-| `ZIO r e a`  	|                                     	| `ZIO[R,E,A]` 	|                                                                                                       	|
-| `UIO a`      	|                                     	| `UIO[A]`     	| This is a type alias in Scala but a concrete type in Haskell due to UIO being an inner monadic type.  	|
-| `EIO e a`    	|                                     	| `IO[E, A]`   	| This is a type alias in Scala but a concrete type in Haskell due to EIO being an inner monadic type.  	|
-| `RIO r a`    	| `ZIO r SomeNonPseudoException a`    	| `RIO[R, A]`  	| Same idea as in Scala. Not to be confused with the RIO library's `RIO` monad, but they are isomorphic. 	|
-| `Task a`     	| `ZIO Void SomeNonPseudoException a` 	| `Task[A]`    	|                                                                                                       	|
-| `UEIO a`     	| `EIO Void a`                        	| `UIO[A]`     	|                                                                                                       	|
-| `URIO r a`   	| `ZIO r Void a`                      	| `URIO[R, A]` 	| Same idea as in Scala; a ZIO value isomorphic to a RIO value (can be projected to the RIO value).     	|
-| `UZIO a`     	| `ZIO Void Void a`                   	| `UIO[A]`     	|                                                                                                       	|
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 22%" />
+<col style="width: 8%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Haskell Type</th>
+<th>Alias for</th>
+<th>Scala Type</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ZIO r e a</code></td>
+<td></td>
+<td><code>ZIO[R,E,A]</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>UIO a</code></td>
+<td></td>
+<td><code>UIO[A]</code></td>
+<td>This is a type alias in Scala but a concrete type in Haskell due to UIO being an inner monadic type.</td>
+</tr>
+<tr class="odd">
+<td><code>EIO e a</code></td>
+<td></td>
+<td><code>IO[E, A]</code></td>
+<td>This is a type alias in Scala but a concrete type in Haskell due to EIO being an inner monadic type.</td>
+</tr>
+<tr class="even">
+<td><code>RIO r a</code></td>
+<td><code>ZIO r SomeNonPseudoException a</code></td>
+<td><code>RIO[R, A]</code></td>
+<td>Same idea as in Scala. Not to be confused with the RIO library’s <code>RIO</code> monad, but they are isomorphic.</td>
+</tr>
+<tr class="odd">
+<td><code>Task a</code></td>
+<td><code>ZIO Void SomeNonPseudoException a</code></td>
+<td><code>Task[A]</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>UEIO a</code></td>
+<td><code>EIO Void a</code></td>
+<td><code>UIO[A]</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>URIO r a</code></td>
+<td><code>ZIO r Void a</code></td>
+<td><code>URIO[R, A]</code></td>
+<td>Same idea as in Scala; a ZIO value isomorphic to a RIO value (can be projected to the RIO value).</td>
+</tr>
+<tr class="even">
+<td><code>UZIO a</code></td>
+<td><code>ZIO Void Void a</code></td>
+<td><code>UIO[A]</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>

@@ -1,0 +1,12 @@
+[//]: # (Table generated from docs/type_aliases.csv using https://www.tablesgenerator.com/markdown_tables)
+
+| Haskell Type 	| Alias for                           	| Scala Type   	| Notes                                                                                                 	|
+|--------------	|-------------------------------------	|--------------	|-------------------------------------------------------------------------------------------------------	|
+| `ZIO r e a`  	|                                     	| `ZIO[R,E,A]` 	|                                                                                                       	|
+| `UIO a`      	|                                     	| `UIO[A]`     	| This is a type alias in Scala but a concrete type in Haskell due to UIO being an inner monadic type.  	|
+| `EIO e a`    	|                                     	| `IO[E, A]`   	| This is a type alias in Scala but a concrete type in Haskell due to EIO being an inner monadic type.  	|
+| `RIO r a`    	| `ZIO r SomeNonPseudoException a`    	| `RIO[R, A]`  	| Same idea as in Scala. Not to be confused with the RIO library's `RIO` monad, but they are isomorphic. 	|
+| `Task a`     	| `ZIO Void SomeNonPseudoException a` 	| `Task[A]`    	|                                                                                                       	|
+| `UEIO a`     	| `EIO Void a`                        	| `UIO[A]`     	|                                                                                                       	|
+| `URIO r a`   	| `ZIO r Void a`                      	| `URIO[R, A]` 	| Same idea as in Scala; a ZIO value isomorphic to a RIO value (can be projected to the RIO value).     	|
+| `UZIO a`     	| `ZIO Void Void a`                   	| `UIO[A]`     	|                                                                                                       	|

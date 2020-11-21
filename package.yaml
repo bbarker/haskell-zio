@@ -1,5 +1,5 @@
 name:                zio
-version:             0.1.0.1
+version:             0.1.0.2
 github:              "bbarker/haskell-zio"
 license:             MPL-2.0
 author:              "Brandon Elam Barker"
@@ -8,13 +8,15 @@ copyright:           "2020 Brandon Elam Barker"
 
 extra-source-files:
 - README.md
-- BuildNotes.md
 - shell.nix
 - package-shell.nix
 - ChangeLog.md
 
+extra-doc-files:
+- docs/BuildNotes.md
+
 # Metadata used when publishing your package
-synopsis:            App-centric Monad-transformer based on Scala ZIO (UIO + Reader + Either/ExceptT).
+synopsis:            App-centric Monad-transformer based on Scala ZIO (UIO + ReaderT + ExceptT).
 category:            Control
 
 # To avoid duplicated efforts in documentation and dealing with the

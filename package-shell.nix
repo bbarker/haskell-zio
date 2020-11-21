@@ -9,7 +9,7 @@ let
       }:
       mkDerivation {
         pname = "zio";
-        version = "0.1.0.1";
+        version = "0.1.0.2";
         src = ./.;
         libraryHaskellDepends = [
           base mtl transformers unexceptionalio unexceptionalio-trans
@@ -20,7 +20,7 @@ let
         ];
         prePatch = "hpack";
         homepage = "https://github.com/bbarker/haskell-zio#readme";
-        description = "App-centric Monad-transformer based on Scala ZIO (UIO + Reader + Either/ExceptT)";
+        description = "App-centric Monad-transformer based on Scala ZIO (UIO + ReaderT + ExceptT)";
         license = stdenv.lib.licenses.mpl20;
       };
 

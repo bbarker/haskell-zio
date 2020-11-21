@@ -37,6 +37,18 @@ directly, which would use your existing nixpkgs channel.
 Of course, this is less likely to work due to potential version
 bound conflicts, but may be useful.
 
+#### Package and release
+
+```
+$ nix-shell shell.nix --run "cabal sdist"
+```
+
+#### Generate documentation (haddocks) with Cabal
+
+```
+$ nix-shell shell.nix --run "cabal haddock"
+```
+
 ### Stack
 
 ```
@@ -44,7 +56,7 @@ $ nix-shell -p stack
 $ stack --nix build
 ```
 
-#### Generate documentation (haddocks)
+#### Generate documentation (haddocks) with Stack
 
 ```
 $ stack --nix build --haddock

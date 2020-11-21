@@ -1,6 +1,6 @@
 name:                zio
-version:             0.1.0.0
-github:              "githubuser/haskell-zio"
+version:             0.1.0.1
+github:              "bbarker/haskell-zio"
 license:             MPL-2.0
 author:              "Brandon Elam Barker"
 maintainer:          "brandon.barker@gmail.com"
@@ -8,23 +8,26 @@ copyright:           "2020 Brandon Elam Barker"
 
 extra-source-files:
 - README.md
+- BuildNotes.md
+- shell.nix
+- package-shell.nix
 - ChangeLog.md
 
 # Metadata used when publishing your package
-# synopsis:            Short description of your package
-# category:            Web
+synopsis:            App-centric Monad-transformer based on Scala ZIO (UIO + Reader + Either/ExceptT).
+category:            Control
 
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/haskell-zio#readme>
+description:         Please see the README on GitHub at <https://github.com/bbarker/haskell-zio#readme>
 
 dependencies:
 - base >= 4.7 && < 5
-- mtl >= 2.2.2
-- transformers >= 0.5.6
-- unexceptionalio >= 0.5.1
-- unexceptionalio-trans >= 0.5.1
+- mtl >= 2.2.2 && < 2.3
+- transformers >= 0.5.6 && < 0.6
+- unexceptionalio >= 0.5.1 && < 0.6
+- unexceptionalio-trans >= 0.5.1 && < 0.6
 
 library:
   source-dirs: src
